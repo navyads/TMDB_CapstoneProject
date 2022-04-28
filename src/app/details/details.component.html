@@ -1,0 +1,50 @@
+<h1 id="wel"><b>TheMovieDB</b></h1>
+<div id="whole">
+    <div id="details">
+        <div id="backimg" [style.backgroundImage]="'url(https://image.tmdb.org/t/p/w500'+mov.backdrop_path+')'">
+            <div id="im">
+                <div id="imgDet"><img [src]="imgUrl+mov.poster_path"></div>
+                <div id="movDet">
+                    <h1 id="title"><b>{{mov.title}}</b></h1>
+                    <h5><b>Genre: </b>•
+                    <div id="genre" *ngFor="let g of mov.genres">
+                        {{g.name}}<pre> • </pre>
+                    </div></h5>
+                    <h5><b>Duration: </b>{{mov.runtime}}m</h5><br>
+                    <h5 id="rdate"><b>Release date: </b>{{mov.release_date}}</h5><br>
+                    <h5 id="overview"><b>Overview: </b>{{mov.overview}}</h5><br>
+                    <h5><b>Production Country: </b>
+                        <h5 id="pc" *ngFor="let p of mov.production_countries">
+                            {{p.name}}
+                        </h5></h5><br>
+                    <h5 id="rating"><b>Rating: </b>{{mov.vote_average}}/10 ★</h5><br>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    
+    <div id="reviews">
+        <!--<textarea id="revtext" name="revtext" rows="3" cols="25">Write your review here...</textarea>
+        <button type="submit" id="revsub">Submit</button><br><br>-->
+        <button type="submit" (click)="getRev()">View Reviews</button><br><br>
+        <div id="data" *ngIf="rData!=null">
+            <div id="part" *ngFor="let r of rData">
+                <div id="sub">
+                    <h6><b>A review by {{r.author}}: </b></h6>
+                    <h6>{{r.content}}</h6>
+                </div><br>
+            </div>
+        </div>
+        <!--<table>
+            <tr *ngFor="let mov of rData">
+                <td>{{mov.author}}</td>
+                <td>{{mov.content}}</td>
+            </tr>
+        </table>-->
+    </div>
+
+    <div id="yrev">
+        <textarea id="txtRev" [(ngModel)]="rev" rows="3" cols="30" placeholder="Write your review here..."></textarea>
+        <button id="butRev" type="submit" (click)="subRev(rev)">Submit</button>
+    </div>
+</div>

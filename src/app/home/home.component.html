@@ -1,0 +1,260 @@
+<div>
+    <!--<div id="search">
+        <form #searchform="ngForm">
+            <input type="text" id="searchBox" name="qry" [(ngModel)]="qry" formControlName="qry" placeholder="Search for a movie">
+            <button type="submit" id="searchButton" (click)="searchMovie()">Search</button>
+            {{qry}}
+        </form>
+    </div>-->
+
+    <div id="search">
+        <form>
+            <input type="text" id="searchBox" name="search" [(ngModel)]="searchString" placeholder="Search for a movie">
+            <!--{{searchString}}-->
+            <button type="submit" id="searchButton" name="subBut" (click)="searchMovie()">Search</button>
+        </form>
+    </div>
+    <h1 id="wel"><b>TheMovieDB</b></h1>
+</div>
+
+<div id="sf">
+    <div id="sort">
+        <h4><b>Sort</b></h4>
+        <form>
+            <select name="Sort" (change)="sortSelect($event)">
+                <option></option>
+                <option value="original_title.asc">Title Ascending</option>
+                <option value="original_title.desc">Title Descending</option>
+                <option value="release_date.asc">Release Date Ascending</option>
+                <option value="release_date.desc">Release Date Descending</option>
+                <option value="vote_average.asc">Rating Ascending</option>
+                <option value="vote_average.desc">Rating Descending</option>
+            </select>
+            <button type="submit" id="sortButton" name="sortBut" (click)="sortMovie()">Sort</button>
+        </form>
+        <!--{{selectedString}}-->
+    </div>
+
+    <div id="filter">
+        <h4><b>Filter</b></h4>
+        <div id="yearf">
+        <form>
+            <input type="text" id="year" name="year" [(ngModel)]="year" placeholder="Based on year">
+            <!--{{year}}-->
+            <button type="submit" id="yearButton" name="yearBut" (click)="yearFilter()">Filter</button>
+        </form>
+        <form>
+            <input type="text" id="genre" name="genre" [(ngModel)]="genre" placeholder="Based on genre">
+            <!--{{genre}}-->
+            <button type="submit" id="genreButton" name="genreBut" (click)="genreFilter()">Filter</button>
+        </form>
+        </div>
+        <div id="ratef">
+        <form>
+            <input type="text" id="rateGT" name="rateGT" [(ngModel)]="rateGT" placeholder="Movies rated above">
+            <!--{{rateGT}}-->
+            <button type="submit" id="rateGTButton" name="rateGTBut" (click)="rategtFilter()">Filter</button>
+        </form>
+        <form>
+            <input type="text" id="rateLT" name="rateLT" [(ngModel)]="rateLT" placeholder="Movies rated below">
+            <!--{{rateLT}}-->
+            <button type="submit" id="rateLTButton" name="rateLTBut" (click)="rateltFilter()">Filter</button>
+        </form>
+        </div>
+        <div id="langf">
+        <form>
+            <select name="langauge" (change)="langSelect($event)">
+                <option>Based on language</option>
+                <option value="en">English</option>
+                <option value="de">German</option>
+                <option value="ru">Russian</option>
+                <option value="es">Spanish</option>
+                <option value="zh">Chinese</option>
+                <option value="ja">Japanese</option>
+                <option value="ko">Korean</option>
+            </select>
+            <button type="submit" id="langButton" name="langBut" (click)="langFilter()">Filter</button>
+        </form>
+        <!--{{selectedString}}-->
+        </div>
+    </div>
+</div><br>
+
+<span *ngIf="yearD!=null">
+    <h3 id="sor"><b>Filter Year Results</b></h3>
+    <div id="movies">
+        <div id="movie-container" *ngFor="let y of yearD">
+                <div><img [src]="imgUrl+y.poster_path"></div>
+                <div id="container">
+                    <div><h5>{{y.title}}</h5></div>
+                    <div style="color: rgb(91, 87, 87);">{{y.release_date}}</div>
+                    <div style="color: rgb(220, 20, 20);"><h6>{{y.vote_average}}/10 ★</h6></div>
+                </div>
+        </div>
+    </div>
+</span>
+
+<span *ngIf="genreD!=null">
+    <h3 id="sor"><b>Filter Genre Results</b></h3>
+    <div id="movies">
+        <div id="movie-container" *ngFor="let g of genreD">
+                <div><img [src]="imgUrl+g.poster_path"></div>
+                <div id="container">
+                    <div><h5>{{g.title}}</h5></div>
+                    <div style="color: rgb(91, 87, 87);">{{g.release_date}}</div>
+                    <div style="color: rgb(220, 20, 20);"><h6>{{g.vote_average}}/10 ★</h6></div>
+                </div>
+        </div>
+    </div>
+</span>
+
+<span *ngIf="langD!=null">
+    <h3 id="sor"><b>Filter Language Results</b></h3>
+    <div id="movies">
+        <div id="movie-container" *ngFor="let l of langD">
+                <div><img [src]="imgUrl+l.poster_path"></div>
+                <div id="container">
+                    <div><h5>{{l.title}}</h5></div>
+                    <div style="color: rgb(91, 87, 87);">{{l.release_date}}</div>
+                    <div style="color: rgb(220, 20, 20);"><h6>{{l.vote_average}}/10 ★</h6></div>
+                </div>
+        </div>
+    </div>
+</span>
+
+<span *ngIf="rateGD!=null">
+    <h3 id="sor"><b>Filter Above-Rating Results</b></h3>
+    <div id="movies">
+        <div id="movie-container" *ngFor="let gt of rateGD">
+                <div><img [src]="imgUrl+gt.poster_path"></div>
+                <div id="container">
+                    <div><h5>{{gt.title}}</h5></div>
+                    <div style="color: rgb(91, 87, 87);">{{gt.release_date}}</div>
+                    <div style="color: rgb(220, 20, 20);"><h6>{{gt.vote_average}}/10 ★</h6></div>
+                </div>
+        </div>
+    </div>
+</span>
+
+<span *ngIf="rateLD!=null">
+    <h3 id="sor"><b>Filter Below-Rating Results</b></h3>
+    <div id="movies">
+        <div id="movie-container" *ngFor="let lt of rateLD">
+                <div><img [src]="imgUrl+lt.poster_path"></div>
+                <div id="container">
+                    <div><h5>{{lt.title}}</h5></div>
+                    <div style="color: rgb(91, 87, 87);">{{lt.release_date}}</div>
+                    <div style="color: rgb(220, 20, 20);"><h6>{{lt.vote_average}}/10 ★</h6></div>
+                </div>
+        </div>
+    </div>
+</span>
+
+<br>
+<span *ngIf="sort!=null">
+    <h3 id="sor"><b>Sort Results</b></h3>
+    <div id="movies">
+        <div id="movie-container" *ngFor="let o of sort">
+                <div><img [src]="imgUrl+o.poster_path"></div>
+                <div id="container">
+                    <div><h5>{{o.title}}</h5></div>
+                    <div style="color: rgb(91, 87, 87);">{{o.release_date}}</div>
+                    <div style="color: rgb(220, 20, 20);"><h6>{{o.vote_average}}/10 ★</h6></div>
+                </div>
+        </div>
+    </div>
+</span>
+
+<span *ngIf="search!=null">
+        <h3 id="sea"><b>Search Results</b></h3>
+        <div id="movies">
+            <div id="movie-container" *ngFor="let s of search">
+                    <div><img [src]="imgUrl+s.poster_path"></div>
+                    <div id="container">
+                        <div><h5>{{s.title}}</h5></div>
+                        <div style="color: rgb(91, 87, 87);">{{s.release_date}}</div>
+                        <div style="color: rgb(220, 20, 20);"><h6>{{s.vote_average}}/10 ★</h6></div>
+                    </div>
+            </div>
+        </div>
+</span>
+
+<h3 id="trend"><b>Trending Movies</b></h3>
+<div id="movies">
+    <div id="movie-container" *ngFor="let mov of movie">
+            <div><img [src]="imgUrl+mov.poster_path"></div>
+            <div class="example-button-row">
+                <div class="example-button-container" style="float: right;">
+                    <button mat-icon-button id="favBut" name="favBut" class="favBut" (click)="setColor($event)">
+                        <mat-icon id="fav" name="fav" class="fav">favorite</mat-icon>
+                      </button>
+                </div>
+            </div>
+            <div id="container">
+                <a routerLink="/details"><div (click)="Details(mov.id)"><h5>{{mov.title}}</h5></div></a>
+                <div style="color: rgb(91, 87, 87);">{{mov.release_date}}</div>
+                <div style="color: rgb(220, 20, 20);"><h6>{{mov.vote_average}}/10 ★</h6></div>
+            </div>
+    </div>
+    <div id="movie-container" *ngFor="let mov of loadm">
+        <div><img [src]="imgUrl+mov.poster_path"></div>
+        <div class="example-button-row">
+            <div class="example-button-container" style="float: right;">
+                <button mat-icon-button id="favBut">
+                    <mat-icon id="fav" name="fav">favorite</mat-icon>
+                  </button>
+            </div>
+        </div>
+        <div id="container">
+            <a routerLink="/details"><div (click)="Details(mov.id)"><h5>{{mov.title}}</h5></div></a>
+            <div style="color: rgb(91, 87, 87);">{{mov.release_date}}</div>
+            <div style="color: rgb(220, 20, 20);"><h6>{{mov.vote_average}}/10 ★</h6></div>
+        </div>
+</div>
+</div>
+<button id="load" name="load" class="btn btn-info" type="submit" (click)="clickCount(); loadData()">Load More</button>
+
+<!--<button mat-fab>
+    <mat-icon>favorite</mat-icon>
+</button>
+<h3 id="top"><b>Top-Rated Movies</b></h3>
+<div id="movies">
+    <div id="movie-container" *ngFor="let t of top">
+            <div><img [src]="imgUrl+t.poster_path"></div>
+            <div id="container">
+                <div><h5>{{t.title}}</h5></div>
+                <div style="color: rgb(91, 87, 87);">{{t.release_date}}</div>
+                <div style="color: rgb(220, 20, 20);"><h6>{{t.vote_average}}/10 ★</h6></div>
+            </div>
+    </div>
+</div>-->
+
+<footer class="text-center text-white">
+    <div class="container p-3"></div>
+    <div class="text-center p-2" style="background-color: rgb(6, 6, 6);">
+      © 2020 Copyright:
+      <a class="text-white" href="https://www.themoviedb.org">themoviedb.org</a>
+    </div>
+  </footer>
+
+<!--<table>
+    <tr *ngFor="let mov of movie">
+        <td>{{mov.title}}</td>
+        <td>{{mov.overview}}</td>
+    </tr>
+</table>
+<ul>
+    <li *ngFor="let mov of movie">
+        {{mov.title}}
+    </li>
+</ul>-->
+<!--results
+results[0]
+results[0].title
+{{movie|json}}-->
+
+<!--<table>
+            <tr *ngFor="let m of res">
+                {{m.title}}
+            </tr>
+        </table>-->

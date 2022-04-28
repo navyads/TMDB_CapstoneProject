@@ -1,0 +1,31 @@
+#wel{
+    background-color: aqua;
+    height: 50px;
+    font-family:'Courier New';
+}
+#whole{
+    font-family:'Courier New';
+}
+#im{
+    display: inline-flex;
+}
+#backimg{
+    background-size: cover;
+}
+#movDet{
+    margin: 10px;
+    font-weight: bold;
+    background-color: aliceblue;
+    opacity: 0.6;
+}
+#genre{
+    display: inline-flex;
+}
+#sub{
+    border-style: ridge;
+    border-radius: 10px;
+    margin: 10px;
+}
+#revtext, #revsub{
+    margin: 4px;
+}

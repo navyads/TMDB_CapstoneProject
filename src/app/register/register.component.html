@@ -1,0 +1,54 @@
+<div class="image1"  [ngStyle]="{'background' : 'url(assets/image/3658607.jpg)'}">
+    <h1 id="tmdb1" align="center">TheMovieDB!</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+<div class="container" id="regForm">
+    <h2 id="userHead">Register User!</h2>
+    <form #regform="ngForm" (ngSubmit)="registerUser()">
+        <!--<small [class.text-danger]="msg.status==500">{{msg.message}}</small>-->
+        <div class="form-group">
+            <label for="userName">Username:</label>
+            <input type="name" [(ngModel)]="user.userName" class="form-control" id="username" placeholder="Enter name" name="username" required #username="ngModel"
+            [class.is-invalid]="username.invalid && username.touched">
+            <small class="text-danger" [class.d-none]="username.valid || username.untouched">Username is required filed</small>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" [(ngModel)]="user.emailId" class="form-control" id="email" placeholder="Enter email" name="email" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" #email="ngModel"
+          [class.is-invalid]="email.invalid && email.touched">
+          <!--<small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required field</small>-->
+          <div *ngIf="email.errors && (email.invalid && email.touched)">
+            <small class="text-danger" *ngIf="email.errors.required">Email Id is required</small>
+            <small class="text-danger" *ngIf="email.errors.pattern">Enter the valid email Id</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pwd">Password:</label>
+          <input type="password" [(ngModel)]="user.password" class="form-control" id="password" placeholder="Enter password" name="password" required #password="ngModel"
+          [class.is-invalid]="password.invalid && password.touched">
+          <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required field</small>
+        </div>
+        <div class="form-group">
+          <label for="cpwd">Confirm Password:</label>
+          <input type="password" (ngModel)="user.password" class="form-control" id="cpassword" placeholder="Re-enter password" name="cpassword" required #cpassword="ngModel"
+          [class.is-invalid]="cpassword.invalid && cpassword.touched">
+          <small class="text-danger" [class.d-none]="(cpassword.value==password.value) || cpassword.untouched">Password and Confirm Password must be same</small>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" name="remember">I agree to your T&C</label>
+        </div>
+        <button type="submit" [disabled]="regform.form.invalid" class="btn btn-info">Register</button>
+    </form>
+    <br>
+    <small>Already have an account? <a routerLink="">Login here!</a></small>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  </div>
+  <router-outlet></router-outlet>

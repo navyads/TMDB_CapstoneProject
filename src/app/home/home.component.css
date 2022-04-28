@@ -1,0 +1,83 @@
+#wel{
+    background-color: aqua;
+    height: 50px;
+    font-family:'Courier New';
+}
+#sf{
+    
+    display: inline-flex;
+}
+h4{
+    font-family:'Courier New';
+}
+#sort{
+    font-family:'Courier New';
+    margin: 6px;
+}
+#filter{
+    font-family:'Courier New';
+    margin: 6px;
+    display: inline-flex;
+}
+#search{
+    float: right;
+}
+#searchBox{
+    border-radius: 20px;
+    height: auto;
+}
+#searchButton, #sortButton, #yearButton, #genreButton, #langButton, #rateGTButton, #rateLTButton{
+    border-radius: 20px;
+    height: auto;
+    background-color: rgb(163, 159, 159);
+    margin: 3px;
+}
+#trend, #top, #sea, #sor{
+    background-color: black;
+    color: aliceblue;
+    font-family:'Courier New';
+    
+}
+#year, #genre, #rateGT, #rateLT{
+    width: 190px;
+}
+#movies{
+    display:inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+#movie-container{
+    
+    width: 204px;  
+    height: auto;
+    border-style: solid;
+    margin: 15px;
+    border-radius: 10px;
+    font-family: cursive;
+}
+#container{
+    margin: 10px;
+}
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+#load{
+    margin: 10px;
+    width:95%;
+    color: white;
+    font-weight: bold;
+}
+#load:hover{
+    color: black;
+}
+#favBut{
+    color:dimgrey;
+}
+#favBut:hover{
+    color:red;
+}
+#favBut:focus{
+    color:red;
+}
